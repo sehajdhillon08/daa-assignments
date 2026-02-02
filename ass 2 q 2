@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n = 5;
+
+    // Arrival and Departure times (in minutes)
+    int arr[] = {540, 550, 560, 660, 680};  // 09:00, 09:10, 09:20, 11:00, 11:20
+    int dep[] = {580, 720, 590, 690, 700};  // 09:40, 12:00, 09:50, 11:30, 11:40
+
+    sort(arr, arr + n);
+    sort(dep, dep + n);
+
+    int platforms = 0, maxPlatforms = 0;
+    int i = 0, j = 0;
+
+    while (i < n && j < n) {
+        if (arr[i] <= dep[j]) {
+            platforms++;
+            i++;
+            maxPlatforms = max(maxPlatforms, platforms);
+        } else {
+            platforms--;
+            j++;
+        }
+    }
+
+    cout << "Minimum number of platforms required = "
+         << maxPlatforms;
+
+    return 0;
+}
